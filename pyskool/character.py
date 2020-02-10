@@ -519,21 +519,24 @@ class Character:
         reveal = flashing if decked else self.can_see_special_answer()
         if reveal:
             self._print_secret(self.safe_secret)
-
+            self.skool.cast_with_safe.discard(self.character_id)
+            
     def reveal_bike_secret(self):
         """Make the character reveal his bike combination digit (if he has
         one, and he is on-screen).
         """
         if self.bike_secret and self.screen.contains(self):
             self._print_secret(self.bike_secret)
-
+            self.skool.cast_with_bike.discard(self.character_id)
+            
     def reveal_storeroom_secret(self):
         """Make the character reveal his storeroom combination letter (if he
         has one, and he is on-screen).
         """
         if self.storeroom_secret and self.screen.contains(self):
             self._print_secret(self.storeroom_secret)
-
+            self.skool.cast_with_store.discard(self.character_id)
+            
     def _get_head_coords(self):
         """Return the coordinates of the character's head."""
         head_x, head_y = self.x + self.head_xy[0], self.y + self.head_xy[1]

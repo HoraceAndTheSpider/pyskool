@@ -758,6 +758,7 @@ class Cast:
             character.initialise_special_answer()
             if character.has_safe_secret():
                 letters += character.initialise_safe_secret()
+                self.skool.cast_with_safe.add(character.character_id)
         return letters
 
     def initialise_bike_combo(self):
@@ -769,6 +770,7 @@ class Cast:
         for character in self.character_list:
             if character.has_bike_secret():
                 digits += character.initialise_bike_secret()
+                self.skool.cast_with_bike.add(character.character_id)
         return digits
 
     def initialise_storeroom_combo(self):
@@ -780,6 +782,7 @@ class Cast:
         for character in self.character_list:
             if character.has_storeroom_secret():
                 letters += character.initialise_storeroom_secret()
+                self.skool.cast_with_store.add(character.character_id)
         return letters
 
     #//////////////////////////////////////////////////////////////////////////

@@ -91,6 +91,10 @@ class Skool:
         self.bike = None
         self.clear_score = True
 
+        self.cast_with_safe = set()
+        self.cast_with_store = set()
+        self.cast_with_bike = set()
+
         self.screenshot_dir = config.get('ScreenshotDir', 'screenshots')
         self.save_game_dir = config.get('SaveGameDir', 'save')
         self.save_game_compression = config.get('SaveGameCompression', 9)

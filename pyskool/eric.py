@@ -127,6 +127,31 @@ class Eric(character.Character):
             self.keyboard.start_writing()
             self.writing = True
             return 0
+        
+        # this allows joystick controlled systems to have a 'quick' way of entering the codes
+        if self.keyboard.was_pressed(keys.AUTOWRITE) and self.skool.beside_blackboard(self):
+            self.raise_arm()
+            self._set_controller(ai.Write())
+            self.writing = True
+            blackboard = self.skool.room(self).blackboard
+
+            # special code here
+            if len(blackboard.lines) == 0:
+
+                if len(self.skool.cast_with_safe) == 0:
+                    blackboard.write(self.skool.safe_combination)                
+                elif len(self.skool.cast_with_store) == 0:
+                    blackboard.write(self.skool.store_combination)                
+                elif len(self.skool.cast_with_bike) == 0:
+                    blackboard.write(self.skool.bike_combination)                
+                else:
+                    for c in self.cast.character_list:
+                        if c.special_answer:
+                            blackboard.write(c.special_answer)
+                            break
+                    
+            self.writing = False
+            return 0
         if self.keyboard.was_pressed(keys.CATCH) and self.can_bend_over():
             self.bend_over()
             self._set_controller(ai.Catch())

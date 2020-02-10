@@ -49,9 +49,9 @@ GIVE_ALL = [pygame.K_7]
 #: Toggle between a water-filled and sherry-filled water pistol.
 SWITCH_PISTOL = [pygame.K_8]
 #: Open all doors and windows.
-OPEN_DOORS = [pygame.K_PAGEUP]
+OPEN_DOORS = [pygame.K_PAGEUP, pygame.K_MINUS]
 #: Close all doors and windows.
-CLOSE_DOORS = [pygame.K_PAGEDOWN]
+CLOSE_DOORS = [pygame.K_PAGEDOWN, pygame.K_EQUALS]
 
 #//////////////////////////////////////////////////////////////////////////////
 # Special keys
@@ -95,7 +95,7 @@ DOWN = [pygame.K_DOWN, pygame.K_a]
 #: Sit/stand.
 SIT_STAND = [pygame.K_s]
 #: Open a desk.
-OPEN_DESK = [pygame.K_o]
+OPEN_DESK = [pygame.K_o, pygame.K_i]
 #: Fire the catapult.
 FIRE_CATAPULT = [pygame.K_f]
 #: Fire the water pistol.
@@ -110,6 +110,8 @@ JUMP = [pygame.K_j]
 WRITE = [pygame.K_w]
 #: Stop writing on a blackboard.
 ENTER = [pygame.K_RETURN]
+#: aoti writing on a blackboard.
+AUTOWRITE = [pygame.K_z]
 #: Try to catch a mouse or frog.
 CATCH = [pygame.K_c]
 #: Acknowledge understanding of a message.
@@ -122,3 +124,10 @@ DUMP_WATER_PISTOL = [pygame.K_t]
 RELEASE_MICE = [pygame.K_r]
 #: Kiss.
 KISS = [pygame.K_k]
+
+#//////////////////////////////////////////////////////////////////////////////
+# NUMBERS
+#//////////////////////////////////////////////////////////////////////////////
+
+TYPE0 = [pygame.K_0]
+TYPE1 = [pygame.K_1]

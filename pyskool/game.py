@@ -212,6 +212,11 @@ class Game:
 
         :param fname: The name of the file to save to.
         """
+        if self.keyboard.moved_joystick != None:
+            self.keyboard.moved_joystick.quit
+            self.keyboard.moved_joystick = None
+        self.keyboard.key_down_events.clear()
+        
         save_game_dir = os.path.join(*self.skool.save_game_dir.split('/'))
         if not os.path.isdir(save_game_dir):
             os.makedirs(save_game_dir)
@@ -221,6 +226,9 @@ class Game:
         f.close()
         debug.log('Skool saved to %s' % os.path.abspath(ofile))
 
+        self.keyboard.setup_joystick()
+
+            
     def _load(self, fname):
         """Load a saved game.
 
@@ -320,10 +328,17 @@ class Game:
                     debug.log('%s: %s' % (c.name, c.special_answer))
             if self.skool.safe_combination:
                 debug.log('Safe: %s' % self.skool.safe_combination)
+                if self.skool.cast_with_safe >0:
+                    debug.log('Unrevealled safe codes %s' % self.skool.cast_with_safe)
             if self.skool.bike_combination:
                 debug.log('Bike: %s' % self.skool.bike_combination)
+                if self.skool.cast_with_bike >0:
+                    debug.log('Unrevealled bike codes %s' % self.skool.cast_with_bike)
             if self.skool.storeroom_combination:
                 debug.log('Storeroom: %s' % self.skool.storeroom_combination)
+                if self.skool.cast_with_store >0:
+                    debug.log('Unrevealled store codes: %s' % self.skool.cast_with_store)
+
         if self.skool.inventory_item_ids:
             eric = self.cast.eric
             inventory = eric.inventory
@@ -356,6 +371,7 @@ class Game:
                 for window_id in self.skool.windows:
                     self.skool.move_door(window_id, True)
                 debug.log('Closed all doors and windows')
+
 
     def _take_screenshot(self):
         """Take a screenshot."""
@@ -463,7 +479,7 @@ class Game:
             return False
 
         self.skool.auto_shut_doors()
-        self.clock.tick(self.screen.fps * self.speed)
+        self.clock.tick_busy_loop(self.screen.fps * self.speed)
         self.skool.draw()
         self.skool.scroll(self.scroll, self.clock)
 
